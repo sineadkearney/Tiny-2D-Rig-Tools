@@ -80,3 +80,65 @@ https://github.com/NickTiny/Tiny-2D-Rig-Tools/assets/86638335/ce175c7c-af37-4b7f
 1. Use 'ARROW' to Nudge hand infront on Limb Chain
 2. Select a Hand Time Offset integer to change hand pose
 3. Use the 'MIRROR' icon to Flip the Drawing
+
+# Updates for this fork:
+
+(and some more information that you may find beneficial)
+
+## Features
+
+- **2D Armature Generation**: Quickly create a standardized 2D armature with spine, arms, and legs.
+- **Automated Rigging**:
+    - **IK/FK Setup**: Automatically creates Inverse Kinematics (IK) chains for limbs.
+    - **Drivers & Controls**: Generates custom properties and drivers for controlling IK influence, limb flipping, and nudging.
+    - **Bone Groups**: Auto-assigns bone colors for easier visual distinction (Left/Right/Center).
+- **Grease Pencil Integration**:
+    - **Layer Binding**: Easily bind Grease Pencil layers to specific bones.
+    - **Lattice Rigging**: Create lattice deformers for Grease Pencil objects driven by the armature.
+    - **Modifier Management**: toggle visibility of modifiers and constraints for better viewport performance.
+- **Turnaround & Action Tools**:
+    - Manage "Turnaround" actions for rotating characters (Head/Body).
+    - Link action constraints to custom properties for easy angle switching.
+- **Rig Control Panel**: A dedicated UI panel for animators to access rig controls (IK switches, Nudge, Flip) without diving into the properties panel.
+
+## Installation
+
+1.  Download the repository as a `.zip` file.
+2.  Open Blender (Compatible with Blender 4.3+).
+3.  Go to **Edit > Preferences > Add-ons**.
+4.  Click **Install...** and select the downloaded `.zip` file.
+5.  Enable the **Animation: Tiny 2D Rig Tools** add-on.
+
+## Usage
+
+### 1. Creating a Rig
+1.  Navigate to the **3D View Sidebar** (press `N`).
+2.  Locate the **Tiny Rig** tab.
+3.  In the **Rig Settings** panel, click **Create Armature**. This generates a base skeleton.
+4.  Enter **Edit Mode** to adjust the bone positions to match your character's proportions.
+
+### 2. Binding Grease Pencil
+1.  Select your Grease Pencil object.
+2.  Ensure the "Target Armature" is set in the panel.
+3.  Use the **Rig Grease Pencil** tools:
+    - **Parent with Armature Constraint**: Simple parenting.
+    - **Parent with Armature Deform**: uses an Armature Modifier. You can assign the active GP layer to a specific bone using the "Assign Active Grease Pencil to Bone" option (Select a bone first).
+    - **Parent Object with Lattice**: Creates a lattice deformer around your object.
+
+### 3. Initializing Controls
+1.  Select the Armature.
+2.  In **Rig Settings**, click **Initialize Armature**.
+3.  Choose which features to generate (IK, Nudge, Turnaround, etc.) and click OK.
+4.  This works by adding drivers to a "Property Bone" (usually the Master or Root) which controls the rig's behavior.
+
+### 4. Animation
+- Use the **Tiny Rig Controller** panel to animate.
+- **IK Controls**: Toggle IK for limbs, Flip IK direction.
+- **Nudge**: Micro-adjust limb positions.
+- **Space Switching**: If setup, switch between Front/Side/3/4 views using Turnaround sliders.
+
+## Compatibility Note (Blender 4.3)
+
+This version has been updated to support **Blender 4.3**, which introduced major changes to Grease Pencil (Grease Pencil v3).
+- Legacy Grease Pencil operators have been replaced.
+- Internal modifier handling has been updated to the unified modifier stack.

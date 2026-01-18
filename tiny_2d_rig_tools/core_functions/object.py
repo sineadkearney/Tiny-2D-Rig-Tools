@@ -10,9 +10,9 @@ def get_consts_on_obj(obj: bpy.types.Object, type: str) -> list:
     return [constraint for constraint in obj.constraints if constraint.type == type]
 
 def get_gp_modifier(obj, name, type):
-    mod = obj.grease_pencil_modifiers.get(name)
+    mod = obj.modifiers.get(name)
     if mod is None:
-        mod = obj.grease_pencil_modifiers.new(name= name, type=type)
+        mod = obj.modifiers.new(name= name, type=type)
     return mod
 
 def get_vertex_group(object, name):

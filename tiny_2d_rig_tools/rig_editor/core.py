@@ -25,14 +25,14 @@ def get_action_offset_bones(
 def set_modifier_and_constraint_viewport(
     obj: bpy.types.Object, enable_status: bool
 ) -> bool:
-    for mod in obj.grease_pencil_modifiers:
+    for mod in obj.modifiers:
         mod.show_viewport = enable_status
     for const in obj.constraints:
         const.enabled = enable_status
 
 
 def check_modifier_and_constraint_viewport(obj: bpy.types.Object) -> bool:
-    for mod in obj.grease_pencil_modifiers:
+    for mod in obj.modifiers:
         if mod.show_viewport == False:
             return mod.show_viewport
     for const in obj.constraints:
@@ -45,7 +45,7 @@ def check_modifier_and_constraint_viewport(obj: bpy.types.Object) -> bool:
 def get_grease_pencil_modifiers(
     obj: bpy.types.Object, type
 ) -> list[bpy.types.Constraint]:
-    return [mod for mod in obj.grease_pencil_modifiers if mod.type == type]
+    return [mod for mod in obj.modifiers if mod.type == type]
 
 
 def gpencil_fix_offset_show_viewport(obj: bpy.types.Object, enable: bool):

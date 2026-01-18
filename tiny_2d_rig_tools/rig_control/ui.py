@@ -114,8 +114,8 @@ class TINY2DRIG_PT_rig_control(bpy.types.Panel):
 
     def draw(self, context):
         obj = context.active_object
-        if not (obj or obj.tiny_rig.get("is_rig")):
-            layout.label(text="Rig not Found", icon="ERROR")
+        if not obj or obj.type != 'ARMATURE' or not obj.tiny_rig.get("is_rig"):
+            self.layout.label(text="Rig not Found", icon="ERROR")
             return
         layout = self.layout
         self.prop_bone = obj.pose.bones[obj.tiny_rig.pose_data_name]

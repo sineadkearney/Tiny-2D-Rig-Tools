@@ -112,7 +112,7 @@ class TINY2DRIG_gp_set_mod_const(bpy.types.Operator):
     @classmethod
     def poll(cls, context):
         if (
-            len(context.active_object.grease_pencil_modifiers) == 0
+            len(context.active_object.modifiers) == 0
             and len(context.active_object.constraints) == 0
         ):
             cls.poll_message_set("Object has no Modifiers or Constraints")
@@ -749,11 +749,11 @@ class TINY2DRIG_gp_vertex_by_layer(TINY2DRIG_rig_gp_base_class):
         armature = context.scene.target_armature
         obj = context.active_object
         layer = obj.data.layers.active
-        mod = get_gp_modifier(obj, "ARMATURE_MOD", "GP_ARMATURE")
+        mod = get_gp_modifier(obj, "ARMATURE_MOD", "ARMATURE")
         obj.parent = armature
         mod.object = armature
         user_mode = context.mode
-        bpy.ops.object.mode_set(mode='EDIT_GPENCIL')
+        bpy.ops.object.mode_set(mode='EDIT')
         bone = context.scene.target_armature.pose.bones[
             context.scene.operator_property_bone_name
         ]
@@ -763,7 +763,7 @@ class TINY2DRIG_gp_vertex_by_layer(TINY2DRIG_rig_gp_base_class):
         if self.assign_active_layer:
             for frame in self.get_frames(context, layer):
                 context.scene.frame_set(frame)
-                context.scene.tool_settings.gpencil_selectmode_edit = 'POINT'
+                # context.scene.tool_settings.gpencil_selectmode_edit = 'POINT'
 
                 vertex_group = get_vertex_group(obj, bone.name)
                 obj.vertex_groups.active_index = vertex_group.index
@@ -774,9 +774,9 @@ class TINY2DRIG_gp_vertex_by_layer(TINY2DRIG_rig_gp_base_class):
                 ]:
                     other_layer.lock = True
                 layer.lock = False
-                bpy.ops.gpencil.select_all(action='SELECT')
-                bpy.ops.gpencil.vertex_group_assign()
-                bpy.ops.gpencil.select_all(action='DESELECT')
+                bpy.ops.grease_pencil.select_all(action='SELECT')
+                bpy.ops.object.vertex_group_assign()
+                bpy.ops.grease_pencil.select_all(action='DESELECT')
         bpy.ops.object.mode_set(mode=user_mode)
         return {"FINISHED"}
 
